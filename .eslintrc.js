@@ -31,7 +31,7 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'off',
     'no-case-declarations': 'off',
-    'no-console': 'error',
+    'no-console': 'warn',
     'react/prop-types': 'off',
     '@typescript-eslint/no-empty-function': 'off',
   },
