@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import FormInput from 'components/FormInput';
 import FormSelect from 'components/FormSelect';
+import FormButton from 'components/FormButton';
 
 const initialValue = {
   formData: [
@@ -16,7 +17,10 @@ const Home: React.FC = () => {
   const { register, watch, control } = useForm({
     defaultValues: initialValue,
   });
-  const { fields, append } = useFieldArray({ control, name: 'formData' });
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'formData',
+  });
   // const { fields: userFields } = useFieldArray({ control, name: 'userData' });
 
   const { formData, userData } = watch(['formData', 'userData']);
@@ -58,12 +62,15 @@ const Home: React.FC = () => {
                   inputRef={register()}
                   type="number"
                 />
+                <FormButton
+                  type="button"
+                  onClick={() => remove(index)}
+                  label="削除"
+                />
               </li>
             ))}
             <li>
-              <button type="button" onClick={addForm}>
-                追加
-              </button>
+              <FormButton type="button" onClick={addForm} label="追加" />
             </li>
           </ul>
           <h3>割り勘比率</h3>
@@ -71,7 +78,7 @@ const Home: React.FC = () => {
         </div>
         <hr />
         <div>
-          <h3>計算結果結果</h3>
+          <h3>計算結果</h3>
           {userData.map((user, index) => (
             <p key={`${user.name}-${index}`}>
               {user.name}さんの支払い金額: {payedByUser(user.name)}
