@@ -1,11 +1,13 @@
 import React from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import FormInput from 'components/FormInput';
+import FormSelect from 'components/FormSelect';
 
 const initialValue = {
   formData: [
     { fee: 0, user: 'A' },
     { fee: 0, user: 'B' },
+    { fee: 100, user: 'B' },
   ],
   userData: [{ name: 'A' }, { name: 'B' }],
 };
@@ -15,7 +17,7 @@ const Home: React.FC = () => {
     defaultValues: initialValue,
   });
   const { fields } = useFieldArray({ control, name: 'formData' });
-  const { fields: userFields } = useFieldArray({ control, name: 'userData' });
+  // const { fields: userFields } = useFieldArray({ control, name: 'userData' });
 
   const { formData, userData } = watch(['formData', 'userData']);
 
@@ -36,10 +38,13 @@ const Home: React.FC = () => {
           <ul>
             {fields.map((field, index) => (
               <li key={field.id} className="flex">
-                <FormInput
+                <FormSelect
                   name={`formData[${index}].user`}
                   label="支払った人"
-                  defaultValue={field.user}
+                  options={userData}
+                  optionsValueKey="name"
+                  optionsViewKey="name"
+                  selectedValue={field.user}
                   inputRef={register()}
                 />
                 <FormInput
