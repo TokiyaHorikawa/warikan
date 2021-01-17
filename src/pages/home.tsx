@@ -16,7 +16,7 @@ const Home: React.FC = () => {
   const { register, watch, control } = useForm({
     defaultValues: initialValue,
   });
-  const { fields } = useFieldArray({ control, name: 'formData' });
+  const { fields, append } = useFieldArray({ control, name: 'formData' });
   // const { fields: userFields } = useFieldArray({ control, name: 'userData' });
 
   const { formData, userData } = watch(['formData', 'userData']);
@@ -27,6 +27,10 @@ const Home: React.FC = () => {
       return previous + Number(current.fee);
     }, 0);
     return payed;
+  };
+
+  const addForm = () => {
+    append({ fee: 0, user: 'A' });
   };
 
   return (
@@ -56,6 +60,11 @@ const Home: React.FC = () => {
                 />
               </li>
             ))}
+            <li>
+              <button type="button" onClick={addForm}>
+                追加
+              </button>
+            </li>
           </ul>
           <h3>割り勘比率</h3>
           <p>ここで割り勘比率を入力</p>
