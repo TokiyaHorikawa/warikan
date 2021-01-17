@@ -7,6 +7,7 @@ type PropsType = {
   placeholder?: string;
   className?: string;
   inputRef?: any;
+  defaultValue?: string | number;
 };
 
 const FormInput: React.FC<PropsType> = ({
@@ -16,6 +17,7 @@ const FormInput: React.FC<PropsType> = ({
   placeholder,
   className,
   inputRef,
+  defaultValue,
 }) => {
   return (
     <label className="block">
@@ -24,6 +26,7 @@ const FormInput: React.FC<PropsType> = ({
         type={type}
         name={name}
         placeholder={placeholder}
+        defaultValue={defaultValue}
         ref={inputRef}
         className={
           'form-input mt-1 block w-full border-2 border-current' + className
