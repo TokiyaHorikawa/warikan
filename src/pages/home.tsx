@@ -104,7 +104,7 @@ const Home: React.FC = () => {
             const { name, rate } = user;
             const paymentFee = payedByUser(name);
             const paymentRateFee = (totalFee() * rate) / 100;
-            const overpayment = paymentRateFee - paymentFee;
+            const overpayment = paymentFee - paymentRateFee;
             return (
               <div key={`${name}-${index}`}>
                 <hr></hr>
