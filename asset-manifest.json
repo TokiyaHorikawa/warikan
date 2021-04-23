@@ -3,14 +3,14 @@
     "main.css": "/warikan/static/css/main.461b0c58.chunk.css",
     "main.js": "/warikan/static/js/main.652af49c.chunk.js",
     "main.js.map": "/warikan/static/js/main.652af49c.chunk.js.map",
-    "runtime-main.js": "/warikan/static/js/runtime-main.cfc2bc2d.js",
-    "runtime-main.js.map": "/warikan/static/js/runtime-main.cfc2bc2d.js.map",
+    "runtime-main.js": "/warikan/static/js/runtime-main.9b0bb68b.js",
+    "runtime-main.js.map": "/warikan/static/js/runtime-main.9b0bb68b.js.map",
     "static/js/2.cd016b18.chunk.js": "/warikan/static/js/2.cd016b18.chunk.js",
     "static/js/2.cd016b18.chunk.js.map": "/warikan/static/js/2.cd016b18.chunk.js.map",
     "static/js/3.489c42fd.chunk.js": "/warikan/static/js/3.489c42fd.chunk.js",
     "static/js/3.489c42fd.chunk.js.map": "/warikan/static/js/3.489c42fd.chunk.js.map",
-    "static/js/4.da35161d.chunk.js": "/warikan/static/js/4.da35161d.chunk.js",
-    "static/js/4.da35161d.chunk.js.map": "/warikan/static/js/4.da35161d.chunk.js.map",
+    "static/js/4.9dc03e16.chunk.js": "/warikan/static/js/4.9dc03e16.chunk.js",
+    "static/js/4.9dc03e16.chunk.js.map": "/warikan/static/js/4.9dc03e16.chunk.js.map",
     "static/js/5.db2ce7af.chunk.js": "/warikan/static/js/5.db2ce7af.chunk.js",
     "static/js/5.db2ce7af.chunk.js.map": "/warikan/static/js/5.db2ce7af.chunk.js.map",
     "index.html": "/warikan/index.html",
@@ -18,7 +18,7 @@
     "static/js/2.cd016b18.chunk.js.LICENSE.txt": "/warikan/static/js/2.cd016b18.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.cfc2bc2d.js",
+    "static/js/runtime-main.9b0bb68b.js",
     "static/js/2.cd016b18.chunk.js",
     "static/css/main.461b0c58.chunk.css",
     "static/js/main.652af49c.chunk.js"
