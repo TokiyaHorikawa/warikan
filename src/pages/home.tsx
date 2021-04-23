@@ -1,131 +1,122 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
-import FormInput from 'components/FormInput';
-import FormSelect from 'components/FormSelect';
 import FormButton from 'components/FormButton';
 
-type FormDataValue = {
-  fee: number;
-  user: string;
+type Payments = {
+  aPayments: { price: number }[];
+  bPayments: { price: number }[];
 };
-type UserData = {
-  name: string;
-  rate: number;
-};
-type FormValue = {
-  formData: FormDataValue[];
-  userData: UserData[];
-};
-const initialValue: FormValue = {
-  formData: [
-    { fee: 0, user: 'A' },
-    { fee: 0, user: 'B' },
-  ],
-  userData: [
-    { name: 'A', rate: 50 },
-    { name: 'B', rate: 50 },
-  ],
-};
-
 const Home: React.FC = () => {
-  const { register, watch, control } = useForm({
-    defaultValues: initialValue,
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalAPrice, setTotalAPrice] = useState(0);
+  const [totalBPrice, setTotalBPrice] = useState(0);
+
+  const { register, control, handleSubmit } = useForm<Payments>({
+    defaultValues: {
+      aPayments: [{ price: 0 }],
+      bPayments: [{ price: 0 }],
+    },
   });
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: 'formData',
-  });
-  // const { fields: userFields } = useFieldArray({ control, name: 'userData' });
-  const { formData, userData } = watch(['formData', 'userData']);
+  const aFieldArray = useFieldArray({ control, name: 'aPayments' });
+  const bFieldArray = useFieldArray({ control, name: 'bPayments' });
 
-  const totalFee = () => {
-    return formData.reduce((previous, current) => {
-      return previous + Number(current.fee);
+  const calcPrice = (data: Payments) => {
+    const { aPayments, bPayments } = data;
+    const totalA = aPayments.reduce((acc, current) => {
+      return acc + Number(current.price);
     }, 0);
-  };
-
-  const payedByUser = (user: string) => {
-    const userFeeList = formData.filter((fee) => fee.user === user);
-    const payed = userFeeList.reduce((previous, current) => {
-      return previous + Number(current.fee);
+    const totalB = bPayments.reduce((acc, current) => {
+      return acc + Number(current.price);
     }, 0);
-    return payed;
+    const total = totalA + totalB;
+    setTotalPrice(total);
+    setTotalAPrice(totalA);
+    setTotalBPrice(totalB);
   };
 
-  const addForm = () => {
-    append({ fee: 0, user: 'A' });
-  };
+  const wariPaymentAmount = useMemo(() => totalPrice / 2, [totalPrice]);
+
+  const resultText = useMemo(() => {
+    const payer = totalAPrice < totalBPrice ? 'A' : 'B';
+    const receiver = payer === 'A' ? 'B' : 'A';
+    const paymentAmount =
+      wariPaymentAmount - (payer === 'A' ? totalAPrice : totalBPrice);
+    return `行動: ${payer}さんが${receiver}さんに${paymentAmount.toLocaleString()}円支払う`;
+  }, [totalAPrice, totalBPrice, wariPaymentAmount]);
 
   return (
-    <div>
-      <h2 className="text-2xl">ホーム</h2>
-      <form>
-        <div className="payed-form">
-          <h3>支払った金額</h3>
+    <div className="grid justify-items-center border-2">
+      <form onSubmit={handleSubmit(calcPrice)}>
+        <div className="m-2">
+          <h3 className="text-lg ">Aさんが支払った金額</h3>
           <ul>
-            {fields.map((field, index) => (
-              <li key={field.id} className="flex">
-                <FormSelect
-                  name={`formData[${index}].user`}
-                  label="支払った人"
-                  options={userData}
-                  optionsValueKey="name"
-                  optionsViewKey="name"
-                  selectedValue={field.user}
-                  inputRef={register()}
-                />
-                <FormInput
-                  name={`formData[${index}].fee`}
-                  label={`金額${index + 1}`}
-                  defaultValue={field.fee}
-                  inputRef={register()}
-                  type="number"
-                />
-                <FormButton
-                  type="button"
-                  onClick={() => remove(index)}
-                  label="削除"
-                />
+            {aFieldArray.fields.map((_, index) => (
+              <li key={`a-payments-${index}`}>
+                <div className="flex">
+                  <input
+                    type="number"
+                    {...register(`aPayments.${index}.price` as const)}
+                    className="form-input mt-1 block w-32 border-2 border-current"
+                  />
+                  <FormButton
+                    type="button"
+                    onClick={() => aFieldArray.remove(index)}
+                    label="削除"
+                  />
+                </div>
               </li>
             ))}
-            <li>
-              <FormButton type="button" onClick={addForm} label="追加" />
-            </li>
           </ul>
-          {/* <h3>割り勘比率</h3> */}
+          <FormButton
+            type="button"
+            onClick={() => aFieldArray.append({ price: 0 })}
+            label="追加する"
+          />
         </div>
-        <hr />
-        <div>
-          <h3>計算結果</h3>
-          <div>
-            <p>トータル: {totalFee()}円</p>
-          </div>
-          {userData.map((user, index) => {
-            const { name, rate } = user;
-            const paymentFee = payedByUser(name);
-            const paymentRateFee = (totalFee() * rate) / 100;
-            const overpayment = paymentFee - paymentRateFee;
-            return (
-              <div key={`${name}-${index}`}>
-                <hr></hr>
-                <p>{name}さん</p>
-                <p>支払い金額: {paymentFee}円</p>
-                <p>割り勘比率: {rate}%</p>
-                <p>支払うべき金額: {paymentRateFee}円</p>
-                <p>過払い金: {overpayment}円</p>
-                <p className="text-red-500">
-                  行動:{' '}
-                  {overpayment > 0
-                    ? `払いすぎた分の${overpayment}円を受け取る`
-                    : `不足している人に${-overpayment}円渡す`}
-                </p>
-              </div>
-            );
-          })}
-
-          <p></p>
+        <div className="m-2">
+          <h3>Bさんが支払った金額</h3>
+          <ul>
+            {bFieldArray.fields.map((_, index) => (
+              <li key={`b-payments-${index}`}>
+                <div className="flex">
+                  <input
+                    type="number"
+                    {...register(`bPayments.${index}.price` as const)}
+                    className="form-input mt-1 block w-32 border-2 border-current"
+                  />
+                  <FormButton
+                    type="button"
+                    onClick={() => bFieldArray.remove(index)}
+                    label="削除"
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+          <button
+            type="button"
+            onClick={() => bFieldArray.append({ price: 0 })}
+            className="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-red-700"
+          >
+            追加する
+          </button>
+        </div>
+        <div className="grid justify-items-center">
+          <input
+            type="submit"
+            value="計算する"
+            className="py-2 px-4 w-full font-semibold rounded-lg shadow-md text-white bg-red-500 hover:bg-red-700"
+          />
         </div>
       </form>
+      <div>
+        <h3 className="text-lg">計算結果</h3>
+        <p>合計: {totalPrice.toLocaleString()}円</p>
+        <p>Aさん合計: {totalAPrice.toLocaleString()}円</p>
+        <p>Bさん合計: {totalBPrice.toLocaleString()}円</p>
+        <p>割り勘金額/人: {wariPaymentAmount.toLocaleString()}円</p>
+        <p className="text-red-500 text-xl">{resultText}</p>
+      </div>
     </div>
   );
 };
