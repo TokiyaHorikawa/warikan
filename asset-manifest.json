@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/warikan/static/css/main.461b0c58.chunk.css",
-    "main.js": "/warikan/static/js/main.652af49c.chunk.js",
-    "main.js.map": "/warikan/static/js/main.652af49c.chunk.js.map",
+    "main.js": "/warikan/static/js/main.ac525981.chunk.js",
+    "main.js.map": "/warikan/static/js/main.ac525981.chunk.js.map",
     "runtime-main.js": "/warikan/static/js/runtime-main.9b0bb68b.js",
     "runtime-main.js.map": "/warikan/static/js/runtime-main.9b0bb68b.js.map",
     "static/js/2.cd016b18.chunk.js": "/warikan/static/js/2.cd016b18.chunk.js",
@@ -21,6 +21,6 @@
     "static/js/runtime-main.9b0bb68b.js",
     "static/js/2.cd016b18.chunk.js",
     "static/css/main.461b0c58.chunk.css",
-    "static/js/main.652af49c.chunk.js"
+    "static/js/main.ac525981.chunk.js"
   ]
 }
