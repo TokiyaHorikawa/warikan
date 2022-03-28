@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/warikan/static/css/main.461b0c58.chunk.css",
+    "main.js": "/warikan/static/js/main.652af49c.chunk.js",
+    "main.js.map": "/warikan/static/js/main.652af49c.chunk.js.map",
+    "runtime-main.js": "/warikan/static/js/runtime-main.c51f8232.js",
+    "runtime-main.js.map": "/warikan/static/js/runtime-main.c51f8232.js.map",
+    "static/js/2.4e95cc6f.chunk.js": "/warikan/static/js/2.4e95cc6f.chunk.js",
+    "static/js/2.4e95cc6f.chunk.js.map": "/warikan/static/js/2.4e95cc6f.chunk.js.map",
+    "static/js/3.74a149c2.chunk.js": "/warikan/static/js/3.74a149c2.chunk.js",
+    "static/js/3.74a149c2.chunk.js.map": "/warikan/static/js/3.74a149c2.chunk.js.map",
+    "static/js/4.10144135.chunk.js": "/warikan/static/js/4.10144135.chunk.js",
+    "static/js/4.10144135.chunk.js.map": "/warikan/static/js/4.10144135.chunk.js.map",
+    "static/js/5.db2ce7af.chunk.js": "/warikan/static/js/5.db2ce7af.chunk.js",
+    "static/js/5.db2ce7af.chunk.js.map": "/warikan/static/js/5.db2ce7af.chunk.js.map",
+    "index.html": "/warikan/index.html",
+    "static/css/main.461b0c58.chunk.css.map": "/warikan/static/css/main.461b0c58.chunk.css.map",
+    "static/js/2.4e95cc6f.chunk.js.LICENSE.txt": "/warikan/static/js/2.4e95cc6f.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c51f8232.js",
+    "static/js/2.4e95cc6f.chunk.js",
+    "static/css/main.461b0c58.chunk.css",
+    "static/js/main.652af49c.chunk.js"
+  ]
+}
