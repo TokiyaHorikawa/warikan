@@ -93,13 +93,11 @@ const Home: React.FC = () => {
               </li>
             ))}
           </ul>
-          <button
+          <FormButton
             type="button"
             onClick={() => bFieldArray.append({ price: 0 })}
-            className="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-red-700"
-          >
-            追加する
-          </button>
+            label="追加する"
+          />
         </div>
         <div className="grid justify-items-center">
           <input
