@@ -2,8 +2,9 @@ import React, { useState, useMemo } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import FormButton from 'components/FormButton';
 import { Result } from 'components/Result';
+import { Input } from 'components/Input';
 
-type Payments = {
+export type Payments = {
   aPayments: { price: number }[];
   bPayments: { price: number }[];
 };
@@ -47,10 +48,9 @@ const Home: React.FC = () => {
             {aFieldArray.fields.map((_, index) => (
               <li key={`a-payments-${index}`}>
                 <div className="flex">
-                  <input
-                    type="number"
-                    {...register(`aPayments.${index}.price` as const)}
-                    className="form-input mt-1 block w-32 border-2 border-current"
+                  <Input
+                    field={`aPayments.${index}.price` as const}
+                    register={register}
                   />
                   <FormButton
                     type="button"
@@ -73,10 +73,9 @@ const Home: React.FC = () => {
             {bFieldArray.fields.map((_, index) => (
               <li key={`b-payments-${index}`}>
                 <div className="flex">
-                  <input
-                    type="number"
-                    {...register(`bPayments.${index}.price` as const)}
-                    className="form-input mt-1 block w-32 border-2 border-current"
+                  <Input
+                    field={`bPayments.${index}.price` as const}
+                    register={register}
                   />
                   <FormButton
                     type="button"
