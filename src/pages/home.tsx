@@ -5,6 +5,7 @@ import { Result } from 'components/Result';
 import { Input } from 'components/Input';
 import { ButtonSubmit } from 'components/ButtonSubmit';
 import { ButtonRemove } from 'components/ButtonRemove';
+import { ButtonAdd } from 'components/ButtonAdd';
 
 export type Payments = {
   aPayments: { price: number }[];
@@ -59,11 +60,7 @@ const Home: React.FC = () => {
               </li>
             ))}
           </ul>
-          <FormButton
-            type="button"
-            onClick={() => aFieldArray.append({ price: 0 })}
-            label="追加する"
-          />
+          <ButtonAdd onClick={() => aFieldArray.append({ price: 0 })} />
         </div>
         <div className="m-2">
           <h3>Bさんが支払った金額</h3>
@@ -80,11 +77,7 @@ const Home: React.FC = () => {
               </li>
             ))}
           </ul>
-          <FormButton
-            type="button"
-            onClick={() => bFieldArray.append({ price: 0 })}
-            label="追加する"
-          />
+          <ButtonAdd onClick={() => bFieldArray.append({ price: 0 })} />
         </div>
         <ButtonSubmit label="計算する" />
       </form>
