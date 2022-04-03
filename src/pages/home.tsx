@@ -3,6 +3,7 @@ import { useForm, useFieldArray } from 'react-hook-form';
 import FormButton from 'components/FormButton';
 import { Result } from 'components/Result';
 import { Input } from 'components/Input';
+import { ButtonSubmit } from 'components/ButtonSubmit';
 
 export type Payments = {
   aPayments: { price: number }[];
@@ -92,13 +93,7 @@ const Home: React.FC = () => {
             label="追加する"
           />
         </div>
-        <div className="grid justify-items-center">
-          <input
-            type="submit"
-            value="計算する"
-            className="py-2 px-4 w-full font-semibold rounded-lg shadow-md text-white bg-red-500 hover:bg-red-700"
-          />
-        </div>
+        <ButtonSubmit label="計算する" />
       </form>
       {!!totalPrice && (
         <Result
