@@ -4,6 +4,7 @@ import FormButton from 'components/FormButton';
 import { Result } from 'components/Result';
 import { Input } from 'components/Input';
 import { ButtonSubmit } from 'components/ButtonSubmit';
+import { ButtonRemove } from 'components/ButtonRemove';
 
 export type Payments = {
   aPayments: { price: number }[];
@@ -53,11 +54,7 @@ const Home: React.FC = () => {
                     field={`aPayments.${index}.price` as const}
                     register={register}
                   />
-                  <FormButton
-                    type="button"
-                    onClick={() => aFieldArray.remove(index)}
-                    label="削除"
-                  />
+                  <ButtonRemove onClick={() => aFieldArray.remove(index)} />
                 </div>
               </li>
             ))}
@@ -78,11 +75,7 @@ const Home: React.FC = () => {
                     field={`bPayments.${index}.price` as const}
                     register={register}
                   />
-                  <FormButton
-                    type="button"
-                    onClick={() => bFieldArray.remove(index)}
-                    label="削除"
-                  />
+                  <ButtonRemove onClick={() => bFieldArray.remove(index)} />
                 </div>
               </li>
             ))}
