@@ -1,20 +1,26 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 type Props = {
   totalPrice: number;
   totalAPrice: number;
   totalBPrice: number;
-  wariPaymentAmount: number;
-  resultText: string;
 };
 
 export const Result: React.VFC<Props> = ({
   totalPrice,
   totalAPrice,
   totalBPrice,
-  wariPaymentAmount,
-  resultText,
 }) => {
+  const wariPaymentAmount = useMemo(() => totalPrice / 2, [totalPrice]);
+
+  const resultText = useMemo(() => {
+    const payer = totalAPrice < totalBPrice ? 'A' : 'B';
+    const receiver = payer === 'A' ? 'B' : 'A';
+    const paymentAmount =
+      wariPaymentAmount - (payer === 'A' ? totalAPrice : totalBPrice);
+    return `行動: ${payer}さんが${receiver}さんに${paymentAmount.toLocaleString()}円支払う`;
+  }, [totalAPrice, totalBPrice, wariPaymentAmount]);
+
   return (
     <div>
       <h3 className="text-lg">計算結果</h3>
