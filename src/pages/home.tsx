@@ -1,8 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
-import FormButton from 'components/FormButton';
 import { Result } from 'components/Result';
 import { Input } from 'components/Input';
+import { ButtonSubmit } from 'components/ButtonSubmit';
+import { ButtonRemove } from 'components/ButtonRemove';
+import { ButtonAdd } from 'components/ButtonAdd';
 
 export type Payments = {
   aPayments: { price: number }[];
@@ -52,20 +54,12 @@ const Home: React.FC = () => {
                     field={`aPayments.${index}.price` as const}
                     register={register}
                   />
-                  <FormButton
-                    type="button"
-                    onClick={() => aFieldArray.remove(index)}
-                    label="削除"
-                  />
+                  <ButtonRemove onClick={() => aFieldArray.remove(index)} />
                 </div>
               </li>
             ))}
           </ul>
-          <FormButton
-            type="button"
-            onClick={() => aFieldArray.append({ price: 0 })}
-            label="追加する"
-          />
+          <ButtonAdd onClick={() => aFieldArray.append({ price: 0 })} />
         </div>
         <div className="m-2">
           <h3>Bさんが支払った金額</h3>
@@ -77,28 +71,14 @@ const Home: React.FC = () => {
                     field={`bPayments.${index}.price` as const}
                     register={register}
                   />
-                  <FormButton
-                    type="button"
-                    onClick={() => bFieldArray.remove(index)}
-                    label="削除"
-                  />
+                  <ButtonRemove onClick={() => bFieldArray.remove(index)} />
                 </div>
               </li>
             ))}
           </ul>
-          <FormButton
-            type="button"
-            onClick={() => bFieldArray.append({ price: 0 })}
-            label="追加する"
-          />
+          <ButtonAdd onClick={() => bFieldArray.append({ price: 0 })} />
         </div>
-        <div className="grid justify-items-center">
-          <input
-            type="submit"
-            value="計算する"
-            className="py-2 px-4 w-full font-semibold rounded-lg shadow-md text-white bg-red-500 hover:bg-red-700"
-          />
-        </div>
+        <ButtonSubmit label="計算する" />
       </form>
       {!!totalPrice && (
         <Result
